@@ -22,36 +22,57 @@ def read_data(file_name):
     return data
 
 
-def selection_sort(my_list, direction='upward'):
+def selection_sort(my_list, direction='ascending'):
     """
     selection sorting
-    :param direction: ('downward'/'upward') upward/downward sorting
+    :param direction: ('ascending'/'descending') ascending/descending sorting
     :param my_list: unordered list of int
     :return: my_list (ordered list of int)
     """
-    right_border = 0
-    while right_border < len(my_list) - 1:
-        min_no = my_list[right_border]
+    left_border = 0
+    while left_border < len(my_list) - 1:
+        min_no = my_list[left_border]
         min_idx = 0
-        for idx, no in enumerate(my_list[right_border:]):
-            if no < min_no:
-                min_no = no
-                min_idx = idx
-        my_list[right_border], my_list[min_idx + right_border] = my_list[min_idx + right_border], my_list[right_border]
-        right_border += 1
-    if direction == 'downward':
-        my_downward_list = []
-        for number in my_list:
-            my_downward_list.insert(0, number)
-        return my_downward_list
+        for idx, no in enumerate(my_list[left_border:]):
+            if direction == 'ascending':
+                if no < min_no:
+                    min_no = no
+                    min_idx = idx
+            if direction == 'descending':
+                if no > min_no:
+                    min_no = no
+                    min_idx = idx
+        my_list[left_border], my_list[min_idx + left_border] = my_list[min_idx + left_border], my_list[left_border]
+        left_border += 1
+    return my_list
+
+
+def bubble_sort(my_list):
+    """
+    upward buble sorting of int
+    :param my_list: unordered list of int
+    :return: my_list (ordered list of int)
+    """
+    right_border = len(my_list) - 1
+    while right_border > 0:
+        right = 0
+        idx = 0
+        while idx < right_border:
+            if my_list[idx] > my_list[idx + 1]:
+                my_list[idx], my_list[idx + 1] = my_list[idx + 1], my_list[idx]
+                right = idx
+            idx += 1
+        right_border = right
     return my_list
 
 
 def main():
     numbers = read_data("numbers.csv")
     print(numbers)
-    sorted_list = selection_sort(numbers['series_1'], 'downward')
-    print(sorted_list)
+    selected_list = selection_sort(numbers['series_1'], 'descending')
+    print(selected_list)
+    bubbled_list = bubble_sort(numbers['series_2'])
+    print(bubbled_list)
 
 
 if __name__ == '__main__':
