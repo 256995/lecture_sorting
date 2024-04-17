@@ -66,6 +66,29 @@ def bubble_sort(my_list):
     return my_list
 
 
+def insertion_sort(my_list):
+    """
+    insertion sort of int
+    :param my_list: unordered list of int
+    :return: my list (ordered list of int)
+    """
+    sort_idx = 1
+    while sort_idx < len(my_list):
+        num = my_list[sort_idx]
+        i = sort_idx - 1
+        while i >= 0:
+            if num < my_list[i]:
+                my_list[i + 1] = my_list[i]
+                i -= 1
+                if i == -1:
+                    my_list[0] = num
+            else:
+                my_list[i + 1] = num
+                i = -1
+        sort_idx += 1
+    return my_list
+
+
 def main():
     numbers = read_data("numbers.csv")
     print(numbers)
@@ -73,6 +96,8 @@ def main():
     print(selected_list)
     bubbled_list = bubble_sort(numbers['series_2'])
     print(bubbled_list)
+    inserted_list = insertion_sort(numbers['series_3'])
+    print(inserted_list)
 
 
 if __name__ == '__main__':
