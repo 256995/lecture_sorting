@@ -22,9 +22,10 @@ def read_data(file_name):
     return data
 
 
-def selection_sort(my_list):
+def selection_sort(my_list, direction='upward'):
     """
     selection sorting
+    :param direction: ('downward'/'upward') upward/downward sorting
     :param my_list: unordered list of int
     :return: my_list (ordered list of int)
     """
@@ -38,13 +39,18 @@ def selection_sort(my_list):
                 min_idx = idx
         my_list[right_border], my_list[min_idx + right_border] = my_list[min_idx + right_border], my_list[right_border]
         right_border += 1
+    if direction == 'downward':
+        my_downward_list = []
+        for number in my_list:
+            my_downward_list.insert(0, number)
+        return my_downward_list
     return my_list
 
 
 def main():
     numbers = read_data("numbers.csv")
     print(numbers)
-    sorted_list = selection_sort(numbers['series_1'])
+    sorted_list = selection_sort(numbers['series_1'], 'downward')
     print(sorted_list)
 
 
